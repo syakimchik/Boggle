@@ -1,0 +1,9 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+    <style name="myButton" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/hbutton</item>
+    </style>
+    <color name="DarkGoldenrod">#FFB90F</color>
+
+</resources>
