@@ -23,5 +23,15 @@
     <string name="youWinner">Вы победили!</string>
     <string name="androidWinner">Android победил!</string>
     <string name="standoff">Ничья!</string>
+    <string name="ruls">Правила</string>
+    <string name="game_ruls"> Из выпавших букв нужно сложить слова. \n
+        Чем длиннее слово, тем больше очков вы заработаете за него</string>
+    <string name="about_points">Очки\n
+        2 буквы        ---->       1 очко \n
+        3 буквы        ---->       2 очка \n
+        4 буквы        ---->       4 очка \n
+        >5 букв        ---->       6 очков \n
+        >8 букв        ---->       10 очков.</string>
+    <string name="coperight">Yakimchik Sergei ©</string>
 
 </resources>

@@ -80,6 +80,17 @@ public class MainActivity extends Activity {
 			}
 		});
         
+        final Button mAboutButton = (Button) findViewById(R.id.AboutAppButton);
+        mAboutButton.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(getApplicationContext(), AboutActivity.class);
+				startActivity(intent);
+			}
+		});
+        
     }
 
     @Override

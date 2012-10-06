@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="@drawable/about">
+        
+    <TextView
+     	android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+     	android:text="@string/ruls"
+     	android:textColor="@color/Green"
+     	android:textSize="24dp"
+     	android:textStyle="bold" 
+     	android:layout_centerHorizontal="true"
+     	android:background="@color/Red"/>
+    
+    <TextView 
+        android:id="@+id/game_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/game_ruls"
+        android:layout_marginTop="35dp"
+        android:textSize="18dp"
+        android:textColor="@color/OrangeRed"
+        android:background="@color/Grey"/>
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:text="@string/coperight"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:textColor="@color/Blue"
+        android:background="@color/OrangeRed"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/game_r"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@color/Snow"
+        android:text="@string/about_points"
+        android:textColor="@color/Purple"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
