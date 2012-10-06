@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
         	InputStream inStream = getResources().openRawResource(R.raw.dict);
         	BufferedReader r = new BufferedReader(new InputStreamReader(inStream));
         	String str;
-        	OutputStreamWriter outStream = new OutputStreamWriter(openFileOutput("wolds.txt", 0));
+        	OutputStreamWriter outStream = new OutputStreamWriter(openFileOutput("words.txt", 0));
         	outStream.write("");
         	while((str=r.readLine())!=null){
         		outStream.append(str.toString()+"\n");

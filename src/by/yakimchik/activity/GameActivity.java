@@ -9,6 +9,7 @@ import java.util.Collections;
 import by.yakimchik.threads.TimerThread;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,15 +31,20 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 	private int mLevel;
 	
 	private ArrayList<String> mWordAndroidList;
+	private ArrayList<String> mYouWordList;
 	
 	private ProgressBar mProgressBar;
 	private TimerThread mTimerThread;
 	
 	private AndroidSearchWordThread mSearchThread;
 	
+	private UserCheckThread mCheckThread;
+	
 	private Button mSearchButton;
 	
 	private TextView androidTextView;
+	
+	private TextView youTextView;
 		
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -64,6 +70,7 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 		final GridView mGridView = (GridView) findViewById(R.id.GridView);
 		
 		androidTextView = (TextView) findViewById(R.id.androidTextView);
+		youTextView = (TextView) findViewById(R.id.youTextView);
 		
 		String[] mCharacters = {
 				"Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", "Ъ", 
@@ -82,12 +89,14 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 		Collections.shuffle(charactersList);
 		Collections.shuffle(charactersList);
 		
+		mYouWordList = new ArrayList<String>();
 		mWordAndroidList = new ArrayList<String>();
 		charList = new ArrayList<String>();
 		for(int i=0; i<16; i++){
 			//charList.add(charactersList.get(i));
 		}
 		
+		/*
 		charList.add("Р");
 		charList.add("Б");
 		charList.add("К");
@@ -104,7 +113,24 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 		charList.add("Д");
 		charList.add("Д");
 		charList.add("Д");
+		*/
 		
+		charList.add("П");
+		charList.add("А");
+		charList.add("Р");
+		charList.add("У");
+		charList.add("В");
+		charList.add("О");
+		charList.add("С");
+		charList.add("Т");
+		charList.add("Х");
+		charList.add("П");
+		charList.add("Р");
+		charList.add("О");
+		charList.add("Е");
+		charList.add("К");
+		charList.add("Л");
+		charList.add("Н");
 		
 		DataAdapter mAdapter = new DataAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, charList);
 		mGridView.setAdapter(mAdapter);
@@ -119,6 +145,17 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				mWordLabel.setText(R.string.points);
+			}
+		});
+		
+		final Button mCheckButton = (Button) findViewById(R.id.okButton);
+		mCheckButton.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				mCheckThread = new UserCheckThread(mCheckHandler);
+				mCheckThread.setWord(mWordLabel.getText().toString().toLowerCase());
+				mCheckThread.start();
 			}
 		});
 		
@@ -143,7 +180,7 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 		for(int i=0; i<4; i++){
 			for(int j=0; j<4; j++){
 				try{
-					board[i][j] = charList.get(k).toString().toUpperCase();
+					board[i][j] = charList.get(k).toString().toLowerCase();
 				}
 				catch (Exception e) {
 					// TODO: handle exception
@@ -181,15 +218,20 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 			
 			if((Math.abs(i_new-i_prev)<=1 && Math.abs(i_new-i_prev)>=0) && 
 					(Math.abs(j_new-j_prev)<=1 && Math.abs(j_new-j_prev)>=0)){
-				mWordLabel.append(charList.get(position));
-				prev_pos = position;
+				if((Math.abs(i_new-i_prev)==0) && (Math.abs(j_new-j_prev)==0)){
+					Toast.makeText(getApplicationContext(), R.string.text, Toast.LENGTH_SHORT).show();
+				}
+				else{
+					mWordLabel.append(charList.get(position).toLowerCase());
+					prev_pos = position;
+				}
 			}
 			else{
 				Toast.makeText(getApplicationContext(), R.string.text, Toast.LENGTH_SHORT).show();
 			}
 		}
 		else{
-			mWordLabel.setText(charList.get(position));
+			mWordLabel.setText(charList.get(position).toLowerCase());
 			prev_pos = position;
 		}
 	}
@@ -204,6 +246,10 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 				mTimerThread.stop();
 				Toast.makeText(getApplicationContext(), "Time is finished", Toast.LENGTH_SHORT).show();
 				mSearchButton.setEnabled(false);
+				
+				Intent intent = new Intent();
+				intent.setClass(getApplicationContext(), ResultActivity.class);
+				startActivity(intent);
 			}
 		}
 	};
@@ -212,7 +258,7 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 		public void handleMessage(Message msg){
 			androidTextView.setText("Android готов! ");
 			
-			mWordAndroidList= msg.getData().getStringArrayList("Worlds");
+			mWordAndroidList= msg.getData().getStringArrayList("Words");
 			
 			if(!mWordAndroidList.isEmpty()){
 				for(String str: mWordAndroidList)
@@ -220,7 +266,43 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 			}
 			else
 				androidTextView.append("\nНет слов!");
+			/*
+			int time = Toast.LENGTH_SHORT;
+			StringBuffer time_str = new StringBuffer(time);
+			Long lg = new Long(time_str.toString());
+			
+			try {
+				mSearchThread.sleep(lg.longValue());
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			
 			mSearchThread.stop();
+		}
+	};
+	
+	final Handler mCheckHandler = new Handler(){
+		public void handleMessage(Message msg){
+			boolean b = msg.getData().getBoolean("CheckWord");
+			if(b){
+				if(youTextView.getText().toString().equals("Ваши слова...")){
+					youTextView.setText(mWordLabel.getText().toString().toLowerCase()+"\n");
+					mYouWordList.add(mWordLabel.getText().toString().toLowerCase());
+					mWordLabel.setText("...");
+				}
+				else{
+					youTextView.append(mWordLabel.getText().toString().toLowerCase()+"\n");
+					mYouWordList.add(mWordLabel.getText().toString().toLowerCase());
+					mWordLabel.setText("...");
+				}
+			}
+			else{
+				Toast.makeText(getApplicationContext(), "Неверное слово. Поищите ещё слова.", 
+						Toast.LENGTH_SHORT).show();
+				mWordLabel.setText("...");
+			}
+			mCheckThread.stop();
 		}
 	};
 	
@@ -247,7 +329,7 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 			Bundle b = new Bundle();
 			
 			try {
-				InputStream inStream = openFileInput("wolds.txt");
+				InputStream inStream = openFileInput("words.txt");
 				if(inStream!=null){
 					InputStreamReader tmp = new InputStreamReader(inStream);
 					BufferedReader reader = new BufferedReader(tmp);
@@ -306,7 +388,7 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 				e.printStackTrace();
 			}
 			
-			b.putStringArrayList("Worlds", mWordList);
+			b.putStringArrayList("Words", mWordList);
 			msg.setData(b);
 			mHandler.sendMessage(msg);
 		}
@@ -317,6 +399,51 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 		
 		public void setLeval(int _leval){
 			leval = _leval;
+		}
+	}
+	
+	private class UserCheckThread extends Thread{
+		
+		private Handler mHandler;
+		
+		private String mWord;
+		
+		public UserCheckThread(Handler h){
+			mHandler = h;
+		}
+		
+		public void run(){
+			Message msg = mHandler.obtainMessage();
+			Bundle b = new Bundle();
+			
+			boolean mWordSearch = false;
+			
+			try{
+				InputStream inStream = openFileInput("words.txt");
+				if(inStream!=null){
+					InputStreamReader tmp = new InputStreamReader(inStream);
+					BufferedReader reader = new BufferedReader(tmp);
+					String str;
+					//boolean first = 0;
+					while((str=reader.readLine())!=null || !mWordSearch){
+						if(str.equals(mWord)){
+							mWordSearch = true;
+						}
+					}
+				}
+			}
+			catch (Throwable e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			
+			b.putBoolean("CheckWord", mWordSearch);
+			msg.setData(b);
+			mHandler.sendMessage(msg);
+		}
+		
+		public void setWord(String word){
+			mWord = word;
 		}
 	}
 

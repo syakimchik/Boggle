@@ -111,29 +111,33 @@
 	        android:max="100"/>
         
     </LinearLayout>
-    
+    
     <TextView
         android:id="@+id/androidTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/GridView"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/textView2"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="35dp"
+        android:layout_toRightOf="@+id/GridView"
         android:text="@string/android_think"
         android:textColor="@color/DarkGoldenrod"
         android:textSize="16dp" />
-    
+    
     <TextView
         android:id="@+id/youTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/GridView"
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@id/textView1"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="35dp"
+        android:layout_toLeftOf="@+id/GridView"
+        android:text="@string/you_word"
         android:textColor="@color/DarkGoldenrod"
-        android:textSize="16dp" 
-        android:text="@string/you_word"/>
+        android:textSize="16dp" />
 
 </RelativeLayout>
