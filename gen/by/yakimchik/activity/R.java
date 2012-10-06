@@ -12,6 +12,7 @@ public final class R {
     }
     public static final class color {
         public static final int DarkGoldenrod=0x7f070000;
+        public static final int Red=0x7f070001;
     }
     public static final class drawable {
         public static final int game=0x7f020000;
@@ -29,15 +30,21 @@ public final class R {
         public static final int GridView=0x7f09000a;
         public static final int NewGameButton=0x7f090000;
         public static final int SelectLevelButton=0x7f090001;
+        public static final int androidPointsTextView=0x7f090014;
         public static final int androidTextView=0x7f09000c;
         public static final int cancelButton=0x7f090008;
+        public static final int editText1=0x7f090011;
+        public static final int editText2=0x7f090012;
+        public static final int layout=0x7f09000e;
         public static final int linearLayout1=0x7f090005;
-        public static final int menu_settings=0x7f09000f;
+        public static final int menu_settings=0x7f090015;
         public static final int okButton=0x7f090007;
         public static final int progressBar1=0x7f09000b;
-        public static final int resultTextView=0x7f09000e;
+        public static final int resultTextView=0x7f09000f;
         public static final int textView1=0x7f090004;
         public static final int textView2=0x7f090009;
+        public static final int userPointsTextView=0x7f090013;
+        public static final int winnerTextView=0x7f090010;
         public static final int wordTextView=0x7f090006;
         public static final int youTextView=0x7f09000d;
     }
@@ -56,6 +63,7 @@ public final class R {
         public static final int Android=0x7f050009;
         public static final int Exit=0x7f050007;
         public static final int about_application=0x7f050006;
+        public static final int androidWinner=0x7f050015;
         public static final int android_think=0x7f050010;
         public static final int app_name=0x7f050000;
         public static final int cancelW=0x7f05000b;
@@ -66,12 +74,14 @@ public final class R {
         public static final int result_titel=0x7f050012;
         public static final int searchW=0x7f05000a;
         public static final int select_level=0x7f050005;
+        public static final int standoff=0x7f050016;
         public static final int start_new_game=0x7f050004;
         public static final int text=0x7f05000e;
         public static final int time=0x7f05000f;
         public static final int title_activity_main=0x7f050003;
         public static final int word=0x7f05000d;
         public static final int you=0x7f050008;
+        public static final int youWinner=0x7f050014;
         public static final int you_word=0x7f050011;
     }
     public static final class style {

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import by.yakimchik.data.GameWords;
 import by.yakimchik.threads.TimerThread;
 
 import android.app.Activity;
@@ -42,8 +43,6 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 	
 	private Button mSearchButton;
 	
-	private TextView androidTextView;
-	
 	private TextView youTextView;
 		
 	@Override
@@ -69,7 +68,6 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 		
 		final GridView mGridView = (GridView) findViewById(R.id.GridView);
 		
-		androidTextView = (TextView) findViewById(R.id.androidTextView);
 		youTextView = (TextView) findViewById(R.id.youTextView);
 		
 		String[] mCharacters = {
@@ -243,9 +241,19 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 			if(total==100){
 				//dismissDialog(0);
 				mTimerThread.setState(TimerThread.STATE_DONE);
-				mTimerThread.stop();
 				Toast.makeText(getApplicationContext(), "Time is finished", Toast.LENGTH_SHORT).show();
 				mSearchButton.setEnabled(false);
+				
+				try {
+					mTimerThread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				mTimerThread.stop();
+				
+				GameWords.AndroidWordsList = mWordAndroidList;
+				GameWords.UserWordList = mYouWordList;
 				
 				Intent intent = new Intent();
 				intent.setClass(getApplicationContext(), ResultActivity.class);
@@ -256,27 +264,7 @@ public class GameActivity extends Activity implements AdapterView.OnItemClickLis
 	
 	final Handler mSearchHandler = new Handler(){
 		public void handleMessage(Message msg){
-			androidTextView.setText("Android готов! ");
-			
 			mWordAndroidList= msg.getData().getStringArrayList("Words");
-			
-			if(!mWordAndroidList.isEmpty()){
-				for(String str: mWordAndroidList)
-					androidTextView.append(str+"\n");
-			}
-			else
-				androidTextView.append("\nНет слов!");
-			/*
-			int time = Toast.LENGTH_SHORT;
-			StringBuffer time_str = new StringBuffer(time);
-			Long lg = new Long(time_str.toString());
-			
-			try {
-				mSearchThread.sleep(lg.longValue());
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
 			
 			mSearchThread.stop();
 		}

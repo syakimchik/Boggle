@@ -4,17 +4,33 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/game">
-
-    <TextView
-        android:id="@+id/resultTextView"
+    
+    <LinearLayout 
+        android:id="@+id/layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="7dp"
-        android:textColor="@color/DarkGoldenrod"
-        android:text="@string/result_titel"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:orientation="horizontal">
+        
+        <TextView
+	        android:id="@+id/resultTextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/DarkGoldenrod"
+	        android:text="@string/result_titel"
+	        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        
+        <TextView
+	        android:id="@+id/winnerTextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/Red"
+	        android:layout_marginLeft="5dp"
+	        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        
+    </LinearLayout>
     
     <TextView
         android:id="@+id/textView1"
@@ -39,5 +55,66 @@
         android:text="@string/Android"
         android:textColor="@color/DarkGoldenrod"
         android:textSize="22dp" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:textColor="@color/DarkGoldenrod"
+        android:text="@string/game_points"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout"
+        android:layout_marginTop="22dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="230dp"
+            android:layout_height="200dp"
+            android:ems="10"
+            android:inputType="textMultiLine" 
+            android:enabled="false"
+            android:layout_alignParentLeft="true"/>
+        
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="230dp"
+            android:layout_height="200dp"
+            android:ems="10"
+            android:enabled="false"
+            android:inputType="textMultiLine"
+            android:layout_alignParentRight="true" />
+        
+    </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/userPointsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="17dp"
+        android:textColor="@color/DarkGoldenrod"
+        android:textSize="22dp" />
+    
+    <TextView
+        android:id="@+id/androidPointsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="17dp"
+        android:textColor="@color/DarkGoldenrod"
+        android:textSize="22dp" />
+    
 
 </RelativeLayout>

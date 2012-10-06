@@ -18,7 +18,10 @@
     <string name="time">Время:</string>
     <string name="android_think">Android думает...</string>
     <string name="you_word">Ваши слова...</string>
-    <string name="result_titel">Результат игры</string>
-    <string name="game_points">Очков: </string>
+    <string name="result_titel">Результат игры:</string>
+    <string name="game_points">Очки</string>
+    <string name="youWinner">Вы победили!</string>
+    <string name="androidWinner">Android победил!</string>
+    <string name="standoff">Ничья!</string>
 
 </resources>
